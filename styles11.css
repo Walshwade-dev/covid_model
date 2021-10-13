@@ -1,0 +1,16 @@
+body {
+    background-color: #2b49ce;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #09a04d;
+}
+
+a {
+    color: #f1f9f9;
+}
+
+a:hover {
+    color: #5687d1cc;
+  }
