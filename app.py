@@ -21,37 +21,12 @@ def home():
 @cross_origin()
 def predict():
     if request.method == "POST":
-
-        # symptoms
-        # test day and month
-        test_date = request.form["test_date"]
-        test_day = int(pd.to_datetime(test_date, format="%Y-%m-%d").day)
-        test_month = int(pd.to_datetime(test_date, format ="%Y-%m-%d").month)
-        # print("Journey Date : ",Journey_day, Journey_month)
-        # print("Journey Date : ",Journey_day, Journey_month)
-
-        # fever
-        fever = int(input("Experiencing fever"))
+        cough = request.form["cough"]
+        fever = request.form["fever"]
+        head_ache = request.form["head_ache"]
+        sore_throat = request.form["sore_throat"]
+        shortness_of_breath = request.form["shortness_of_breath"]
         
-        # print("enter one or zero for yes or no")
-
-        # sore_throat
-        sore_throat = int(input("Experiencing sore_throat"))
-        
-        # print("enter one or zero for yes or no")
-
-        # shortness_of_breath
-        shortness_of_breath = int(input("Experiencing shortness_of_breath"))
-        
-        # print("enter one or zero for yes or no")
-
-        # Head_ache
-        Head_ache = int(input("Experiencing Head_ache"))
-        
-        # print("enter one or zero for yes or no")
-
-        # categorical data
-        # age_60_and_above
 
         age_60_and_above =request.form['age_60_and_above']
         if(age_60_and_above=='yes'):
@@ -84,6 +59,9 @@ def predict():
 
         else:
             test_indication = 3
+        int_features = [[int(cough, fever, sore_throat, head_ache, shortness_of_breath), gender, age_60_and_above, test_indication]]
+        final_features = (int_features)
+        print (final_features)
 
            
 
@@ -93,14 +71,14 @@ def predict():
 
        
         
-        prediction=model.predict([corona_result])
+        prediction=model.predict([[cough, fever, sore_throat, head_ache, shortness_of_breath, gender, age_60_and_above]])
 
         output=round(prediction[0],2)
 
-        return render_template('home.html',prediction_text="Your corona result is:".format(output))
+        return render_template('index.html',prediction_text="Your corona result is:".format(output))
 
 
-    return render_template("home.html")
+    return render_template("index.html")
 
 
 
